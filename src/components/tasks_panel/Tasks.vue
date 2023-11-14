@@ -40,6 +40,5 @@ export default {
 }
 .cards{
  padding: 20px 20px;
-  /* background-color: red; */
 }
 </style>

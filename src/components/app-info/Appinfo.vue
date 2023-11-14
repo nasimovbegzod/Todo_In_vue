@@ -3,11 +3,6 @@
   <form class="d-flex justify-content-between" @submit.prevent>
     <input v-model="inputText" type="text" class="input_dt form-control" placeholder="Yangi vazifa qo'shish" aria-label="Example text with button addon" aria-describedby="button-addon1">
     <button @click="in_data" type="submit" class="btn">+</button>
-       <!-- <div v-if="outputObj">
-      <p>{{ outputObj.text }}</p>
-      <p>{{ outputObj.date }}</p>
-      <p>{{ outputObj.time }}</p>
-    </div> -->
   </form>
   <div>
    Bugun: {{ formattedDateTime  }}
@@ -21,13 +16,12 @@ export default{
     return{
       hozirgiVaqt: new Date(), 
       inputText: '',
-      // outputObj: null
     }
   },
   methods: {
     in_data(e) {
         const matchResult = this.inputText.match(/(\d{1,2}\/\d{1,2}\/\d{4}), (\d{1,2}:\d{2})/);
-        const matchResult2 = this.inputText.match(/(\d{2}\/\d{2}\/\d{4},\s\d{2}:\d{2})/);
+        const matchResult2 = this.inputText.match(/(\d{1,2}\/\d{1,2}\/\d{4})/);
         let sanaVaVaqtniAjratish = /(\d{2}\/\d{2}\/\d{4},\s\d{2}:\d{2})/;
         const result = this.inputText.match(sanaVaVaqtniAjratish);
         if (result) {
@@ -41,16 +35,12 @@ export default{
           time: time
         };
         this.$emit('createObj', outputObj)
-      } else if(!matchResult) {
-          // const [,] = matchResult;
-        
+      } else if(!matchResult) {    
         const outputObj = {
           text: this.inputText,
-          // date: date,
-          // time: time
+      
         };
         this.$emit('createObj', outputObj)
-        // alert('Iltimos, matnni to\'g\'ri formatda kiriting: "MM/DD/YYYY, HH:mm"');
       }
         }else if (!result){
           if (matchResult) {
@@ -63,15 +53,12 @@ export default{
         };
         this.$emit('createObj', outputObj)
       } else if(!matchResult) {
-          // const [,] = matchResult;
+        
         
         const outputObj = {
           text: this.inputText,
-          // date: date,
-          // time: time
         };
         this.$emit('createObj', outputObj)
-        // alert('Iltimos, matnni to\'g\'ri formatda kiriting: "MM/DD/YYYY, HH:mm"');
       }
         }
         

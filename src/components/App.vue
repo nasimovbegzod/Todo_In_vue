@@ -1,8 +1,6 @@
 <template>
   <div class="container">
     <Appinfo @createObj="createFnc" />
-    <!-- <h2 v-for="newblog in blogArr">{{ newblog }}
-    </h2> -->
     <h2>Bugun</h2>
     <Tasks v-for="newArr in arrData" v-bind:newArr="newArr" />
     <h2>Ertaga</h2>
@@ -32,7 +30,6 @@ export default {
     };
   },
    mounted() {
-    // Saqlangan qiymatni olish
     const storedArrData = localStorage.getItem("arrDataLocalStorage");
     if (storedArrData) {
       this.arrData = JSON.parse(storedArrData);
@@ -53,7 +50,6 @@ export default {
       const msg_obj = item.text;
       const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
       const dataRegex2 = msg_obj.match(dateRegex) || msg_obj;
-      //  var bugunIndex = msg_obj.includes("Bugun");
       if (msg_obj.includes("Bugun")) {
         this.arrData.push(item);
         localStorage.setItem("arrDataLocalStorage", JSON.stringify(this.arrData));
