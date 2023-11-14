@@ -29,13 +29,12 @@ export default {
       );
       const matchResult2 = this.inputText.match(/(\d{1,2}\/\d{1,2}\/\d{4})/);
       const matchResult3 = this.inputText.match(/(\d{1,2}:\d{2})/);
-      let sanaVaVaqtniAjratish =
-        /(\d{2}\/\d{2}\/\d{4},\s\d{2}:\d{2})/ ||
-        /(\d{1,2}:\d{2})/ ||
-        /(\d{1,2}\/\d{1,2}\/\d{4})/;
-      const result = this.inputText.match(sanaVaVaqtniAjratish);
+      let sanaVaVaqtniAjratish = /(\d{2}\/\d{2}\/\d{4},\s\d{2}:\d{2})/;
+      let vaqtOlish = /(\d{1,2}:\d{2})/;
+      let sanaOLish = /(\d{1,2}\/\d{1,2}\/\d{4})/;
+      const result = this.inputText.match(sanaVaVaqtniAjratish) || this.inputText.match(vaqtOlish) || this.inputText.match(sanaOLish) ;
       if (result) {
-        let text = this.inputText.replace(sanaVaVaqtniAjratish, "").trim();
+        let text = this.inputText.replace(/[0-9\/:]/g, '').trim()
         if (matchResult || matchResult2 || matchResult3) {
           const [, date, time] = matchResult || matchResult2 || matchResult3;
 
@@ -61,9 +60,9 @@ export default {
             time: time,
           };
           this.$emit("createObj", outputObj);
-          this.inputText = ""
-
-        } else if (!matchResult || !matchResult2 || !matchResult3) {
+          this.inputText = "";
+        } 
+        else if (!matchResult || !matchResult2 || !matchResult3) {
           const outputObj = {
             text: this.inputText,
           };

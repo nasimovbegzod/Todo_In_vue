@@ -8,8 +8,8 @@
         type="checkbox"
       />
       <h5 :class="{ line_top: isHighlighted }">{{ newArr.text }}</h5>
-      <p :class="{ line_top: isHighlighted }">{{ newArr.time }}</p>
       <p :class="{ line_top: isHighlighted }">{{ newArr.date }}</p>
+      <p :class="{ line_top: isHighlighted }">{{ newArr.time }}</p>
     </div>
   </div>
 </template>
@@ -26,9 +26,18 @@ export default {
       isHighlighted: false,
     };
   },
+   mounted() {
+    const StorageKey = `highlighted_${this.newArr.id}`;
+    const gedState = localStorage.getItem(StorageKey);
+    if (gedState) {
+      this.isHighlighted = JSON.parse(gedState);
+    }
+  },
   methods: {
     line_top_fnc() {
       this.isHighlighted = !this.isHighlighted;
+        const StorageKey = `highlighted_${this.newArr.id}`;
+      localStorage.setItem(StorageKey, JSON.stringify(this.isHighlighted));
     },
   },
 };
