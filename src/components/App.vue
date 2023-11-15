@@ -52,9 +52,9 @@ export default {
       const msg_obj = item.text;
       const msg_obj2 = item.date
 
-      const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-      // const dataRegex2 = msg_obj2.match(dateRegex);
-      const dataRegex3 = msg_obj.match(dateRegex) && msg_obj2.match(dateRegex)
+      // const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+      // const dataRegex2 = msg_obj2.match(dateRegex !== undefined);
+      // const dataRegex3 = msg_obj.match(dateRegex)
 
 
       if (msg_obj === "") {
@@ -78,19 +78,19 @@ export default {
         item.time = item.time;
       }
 
-      if (msg_obj.includes("Bugun")) {
+      if (msg_obj.includes("Bugun") || msg_obj.includes("bugun")) {
         this.arrData.push(item);
         localStorage.setItem(
           "arrDataLocalStorage",
           JSON.stringify(this.arrData)
         );
-      } else if (msg_obj.includes("Ertaga")) {
+      } else if (msg_obj.includes("Ertaga") || msg_obj.includes("ertaga")) {
         this.arrData2.push(item);
         localStorage.setItem(
           "arrData2LocalStorage",
           JSON.stringify(this.arrData2)
         );
-      } else if (dataRegex3) {
+      } else if (msg_obj2 && msg_obj2.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
         this.arrData3.push(item);
         localStorage.setItem(
           "arrData3LocalStorage",
